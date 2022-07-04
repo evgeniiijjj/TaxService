@@ -1,8 +1,8 @@
 import java.util.Random;
-import java.util.concurrent.atomic.AtomicInteger;
+import java.util.concurrent.atomic.LongAdder;
 
 public class TaxService {
-    final AtomicInteger taxAccount = new AtomicInteger();
+    final LongAdder taxAccount = new LongAdder();
     final int pause = 100;
 
     public static void main(String[] args) throws InterruptedException {
@@ -18,7 +18,7 @@ public class TaxService {
         thread1.join();
         thread2.join();
         thread3.join();
-        System.out.printf("Итого общий доход равен %d р.", service.taxAccount.get());
+        System.out.printf("Итого общий доход равен %d р.", service.taxAccount.sum());
     }
 
     int[] getArray() {

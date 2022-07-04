@@ -17,7 +17,7 @@ public class Shop implements Runnable {
             try {
                 Thread.sleep(pause);
             } catch (InterruptedException ignored) { }
-            service.taxAccount.addAndGet(gain[i]);
+            service.taxAccount.add(gain[i]);
             System.out.printf("Магазин %s получил выручку в размере %d р.\n", name, gain[i]);
         }
         System.out.printf("Магазин %s закрылся\n", name);
