@@ -1,12 +1,15 @@
+import java.util.concurrent.atomic.LongAdder;
+
 public class Shop implements Runnable {
-    private final TaxService service;
+
+    private final LongAdder taxAccount;
     private final int[] gain;
     private final int pause;
 
-    public Shop(TaxService service, int[] gain) {
-        this.service = service;
+    public Shop(LongAdder taxAccount, int[] gain, int pause) {
+        this.taxAccount = taxAccount;
         this.gain = gain;
-        this.pause = service.pause;
+        this.pause = pause;
     }
 
     @Override
@@ -17,7 +20,7 @@ public class Shop implements Runnable {
             try {
                 Thread.sleep(pause);
             } catch (InterruptedException ignored) { }
-            service.taxAccount.add(gain[i]);
+            taxAccount.add(gain[i]);
             System.out.printf("Магазин %s получил выручку в размере %d р.\n", name, gain[i]);
         }
         System.out.printf("Магазин %s закрылся\n", name);
